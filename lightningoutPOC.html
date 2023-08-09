@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lighting out</title>
+    <script
+      type="text/javascript"
+      src="https://cloud-builders--textany.sandbox.my.site.com/lightning/lightning.out.js"
+    ></script>
+    <script type="text/javascript">
+      var varAccessToken =
+        "00D190000009tYn!AQQAQEi.sEHNmAb4WUYgw9FvKr38n60OmO…6eDBmIup8XsnogPiEwlkStUMjxlXovuO0ewaBPX_N6VjKsVrA";
+      var strOrgId = "00D190000009tYnEAI";
+      var strOrgName = "Text Anything API";
+      var strCurrentUserName =
+        "textanythingsalesforceapi@cloud-builders.com.textany";
+      var strLtngEndpointURI =
+        "https://cloud-builders--textany.sandbox.my.site.com";
+
+      if ($Lightning) {
+        $Lightning.use("c:textAnythingAdminLtngAPP", function () {
+          $Lightning.createComponent(
+            "c:textAnythingAdminLtng",
+            {
+              orgId: strOrgId,
+              orgName: strOrgName,
+              strCurrentUserName: strCurrentUserName,
+              vfPageAction: vfPageAction,
+            },
+            "lightning",
+            function (cmp) {
+              document.getElementById("spinner").className += " slds-hide";
+            },
+            strLtngEndpointURI,
+            varAccessToken
+          );
+
+          function vfPageAction(requestJSON) {
+            if (JSON.parse(requestJSON).actionType == "cancelMyAccount") {
+              cancelMyAccount(); //this function will contains the logic to cancel the user account from Text Anything
+            } else if (
+              JSON.parse(requestJSON).actionType == "updateCampaignMaping"
+            ) {
+              var strPhoneCampaignMappingList = JSON.parse(requestJSON).message;
+              updatePhoneCampaignMapping(strPhoneCampaignMappingList); //this function will contains the logic to map purchased phone number and A2P campaign.
+            } else if (
+              JSON.parse(requestJSON).actionType == "updateAccountType"
+            ) {
+              var strAccountPlanType = JSON.parse(requestJSON).message;
+              updateAccountPlanType(strAccountPlanType); //this function will contains the logic to update the selected upgraded account plan.
+            }
+          }
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="lightning"></div>
+  </body>
+</html>
