@@ -1,33 +1,40 @@
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </head> 
-    <body>
-        <h1>My External Page</h1>
-        <div id="lightning-out"></div>
-        <script src="https://meau--staging.sandbox.my.site.com/lightning/lightning.out.js"></script>
-        <script>
-		var email ="sunny.ravesh@meau.com";
-		if ($Lightning) {
-            $Lightning.use(
-                'c:SRMLtngApp',
-                function () { 
-                    $Lightning.createComponent(
-                        'c:registeredSofware', 
-                        {email: email}, 
-                        'lightning-out',
-                        function (cmp) {
-                            console.log('The component was created.');
-                        }
-                    );
-                },
-                'https://meau--staging.sandbox.my.site.com/',
-				"00D53000000y8P8!AQEAQAGaNWetdD5YdDwkK3stOY.r0eH6lmuwxtPRrTtmnjtgtIs3Wb4Ze6LbTZkVNb9psUQemwW7kuFn1wU0Juj8S_e8OWWN"
-            );
-		}
-        </script>
-		
-		<div id="lightning-out"></div>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lighting out</title>
+    <script
+      type="text/javascript"
+      src="https://meau--staging.sandbox.my.site.com/lightning/lightning.out.js"
+    ></script>
+    <script type="text/javascript">
+      
+      var email ="sunny.ravesh@meau.com";
+      var strLtngEndpointURI =
+        "https://meau--staging.sandbox.my.site.com";
+	 var varAccessToken =
+        "00D53000000y8P8!AQEAQAGaNWetdD5YdDwkK3stOY.r0eH6lmuwxtPRrTtmnjtgtIs3Wb4Ze6LbTZkVNb9psUQemwW7kuFn1wU0Juj8S_e8OWWN";
+
+      if ($Lightning) {
+        $Lightning.use("c:SRMLtngApp", function () {
+          $Lightning.createComponent(
+            "c:registeredSofware",
+            {
+              email: email,
+            },
+            "lightning",
+            function (cmp) {
+            },
+            strLtngEndpointURI,
+            varAccessToken
+          );
+         
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="lightning"></div>
+  </body>
 </html>
